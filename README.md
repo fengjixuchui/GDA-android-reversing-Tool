@@ -1,9 +1,6 @@
 # GDA(GJoy Dex Analysizer)
 
-
-Most reverse engineers mainly use Java decompiler, commercial dalvik decompiler Jeb and smali2java to analyze Android APPs. Java decompiler is based on Java bytecode, including JD, JD-GUI, jadx, and others. smali2java is a decompiler based on Smali code. They have their own shortcomings, such as Java decompiler depends on convert of dex2jar. For complex, obfuscated or packed apks, there are problem of translation failure.   smali2java decompiles Smali code which should be translated from DEX with apktool, so it increases the difficulty and error rate, and decreases the speed of manual analysis. In addition, their interaction is poor, which increases the difficulty of manual analysis. Although the commercial Jeb has better interactivity, it is easy to death when analyzing large-sized APP with the Multidex, and it is very expensive...  
-
-Here, a new decompiler based on Dalvik bytecode, GDA, is proposed and implemented in C++ language to provide more sophisticated, fast and convenient decompilation support. GDA is completely self-independent. It supports APK, DEX, ODEX, oat files, and run without installation and Java VM support. GDA only takes up 2M of your disk space, and you can use it in any newly installed windows system and virtual machine system. In addition, GDA has more features as follows:
+Here, a new Dalvik bytecode decompiler, GDA（this project started in 2013 and released its first version 1.0 in 2015 at www.gda.wiki:9090) , is proposed and implemented in C++ to provide more sophisticated, fast and convenient decompilation support. GDA is completely self-independent and very stable. It supports APK, DEX, ODEX, oat files, and run without installation and Java VM support. GDA only takes up 2M of your disk space, and you can use it in any newly installed windows system and virtual machine system without additional configuration. In addition, GDA has more excellent features as follows:
 
 
 
@@ -19,7 +16,7 @@ Interactive operation:
     5.save the analysis results in gda db file.
     ...
   
-Practical Tools for Assisted Analysis:
+Utilities for Assisted Analysis:
     1.extracting DEX from ODEX;
     2.extracting DEX from OAT;
     3.XML Decoder;
@@ -84,8 +81,19 @@ New features:
   
   python script:https://github.com/charles2gan/GDA-android-reversing-Tool/wiki/GDA-Python-scripts
   
+# Shows:
   
+  File loading and decompiling:
   
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/gif/load.gif)
   
+  MalScan, API search, x-ref...
   
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/gif/check.gif)
   
+  Url,Xml,string x-ref...
+
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/gif/mainfest.gif)
+  
+  variable trace
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/gif/dataflow_return.gif)
