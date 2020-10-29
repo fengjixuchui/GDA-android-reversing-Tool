@@ -12,9 +12,9 @@
 
 # ˇ GDA(GJoy Dex Analysizer)
 
-GDA, a new Dalvik bytecode decompiler, is implemented in C++ to provide more sophisticated, fast and convenient decompilation support. GDA is completely self-independent and stable. It supports APK, DEX, ODEX, OAT files(supports jar, class and aar files since 3.79), and run without installation and Java VM support. And you can use it in any newly installed windows system and virtual machine system without additional configuration. GDA original file is 2m, and the size of the new version is increased to 5M after VMP protection.
+GDA, a new Dalvik bytecode decompiler, is implemented in C++ to provide more sophisticated, fast and convenient decompilation support. GDA is completely self-independent and stable. It supports APK, DEX, ODEX, OAT files(supports JAR, CLASS and AAR files since 3.79), and run without installation and Java VM support. And you can use it in any newly installed windows system and virtual machine system without additional configuration. GDA original file is 2m, and the size of the new version is increased to 5M after VMP protection.
 
-GDA is not only a decompiler, but also a powerful and fast reverse analysis platform. It supports not only routine analysis operations, but also malicious behavior detection, URL extraction, packer identification, variable tracking analysis, deobfuscation, Python& Java scripts, device memory extraction, dex extraction etc.
+GDA is not only a decompiler, but also a powerful and fast reverse analysis platform. It supports not only routine analysis operations, but also **Malicious behavior detection, Privacy leaking detection, Vulnerability detection, Path solving, Packer identification, Variable tracking analysis, Deobfuscation, Python& Java scripts, Device memory extraction, Data decryption and encryption** etc. 
 
 In addition, GDA has more excellent features as follows:
 
@@ -35,6 +35,8 @@ In addition, GDA has more excellent features as follows:
     3.XML Decoder (Component filter);
     4.Algorithm tool(Support rolling encryption and almost all popular encryption algorithms);
     5.Device memory dump(Dump so, odex, dex, oat file);
+    6.Path solving;
+    7.Static vulnerability scanner;
     ...
     
 𝕮 New features:
@@ -51,13 +53,15 @@ In addition, GDA has more excellent features as follows:
     11.Association of permissions with modules;
     12.Extract all the urls in APK.
     13.Apk Forensics Analysis.
-    14.A rule-based static vulnerability scanner.
+    14.Static vulnerability scanner based on stack state machine and dynamic rule interpreter..
     15.Smart Rename.
     16.Support for .jar files, .class files and .aar files.
     17.Dual decompiler mode.
     18.Deep URL extraction.
     19.Multi-DEX Merge.
     20.Personalized and Customizable UI.
+    21.Privacy leaking scanning.
+    22.Path solving based on low-level intermediate representation(LIR).
     ...
 ```  
 
@@ -87,7 +91,7 @@ In addition, GDA has more excellent features as follows:
 |Ctr+C    |Copy|
 |Ctr+V    |Paste, only for editable boxes|
 |Ctr+X    |Cut|
-|Ctr+F    |Find out the string of the current window|
+|Ctr+F    |Find out the string of the code area|
 |Ctr+S    |Save the modifications into the GDA database file|
 
 
@@ -105,18 +109,31 @@ In addition, GDA has more excellent features as follows:
 
 # ˇ Usage:
 
-  Drag file into GDA, if you wanna analyze `.jar/.class` file, please convert the `.jar/class` to `DEX` by `dx tool` in android sdk path `android-sdk/build-tools/{sdkversion}/`
+  Drag file into GDA, if you wanna analyze `.jar/.class/.aar` file, please convert the `jar/class/aar` to `DEX` by `dx tool` in android sdk path `android-sdk/build-tools/{sdkversion}/`
   ```
   dx --dex --output=<target.dex> <origin.jar>
   ```
+  Since GDA3.79, the automatic conversion of the above files is supported. You just need to choose the correct dx.bat path(JUST ONCE) when open the `.jar/.class/.aar` file. If you don't have Android SDK in your system, you can try **[this one](https://github.com/charles2gan/GDA-android-reversing-Tool/tree/master/dx_tool)**. Please make sure that the dx.bat works properly.
   
-  Brief guide: https://github.com/charles2gan/GDA-android-reversing-Tool/wiki
+  ***[Brief guide](https://github.com/charles2gan/GDA-android-reversing-Tool/wiki)***
   
-  Python script: https://github.com/charles2gan/GDA-android-reversing-Tool/wiki/GDA-Python-scripts
+  ***[Python script](https://github.com/charles2gan/GDA-android-reversing-Tool/wiki/GDA-Python-scripts)***
   
-  GDA static taint analysis: https://github.com/charles2gan/GDA-android-reversing-Tool/wiki/GDA-Static-Taint-analysis
+  ***[GDA static taint analysis](https://github.com/charles2gan/GDA-android-reversing-Tool/wiki/GDA-Static-Taint-analysis)***
+  
+  ***[Batch decryption of APP strings](https://github.com/charles2gan/GDA-android-reversing-Tool/wiki/Batch-decryption-of-APP-strings)***
   
   
+# ˇ Color theme:
+
+***[Download Here](https://github.com/charles2gan/GDA-android-reversing-Tool/tree/master/GDA%20Color%20theme)***
+
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/white_black.png)
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/white_black1.png)
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/white_red.png)
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/black_black.png)
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/black_blue.png)
+  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/black_green.png)
   
 # ˇ Shows:
   
@@ -135,11 +152,4 @@ In addition, GDA has more excellent features as follows:
   ☳ Variable trace
   ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/gif/dataflow_return.gif)
   
-  ☴ Color theme
-  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/white_black.png)
-  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/white_black1.png)
-  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/white_red.png)
-  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/black_black.png)
-  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/black_blue.png)
-  ![](https://github.com/charles2gan/GDA-android-reversing-Tool/blob/master/GDA%20Color%20theme/black_green.png)
   
